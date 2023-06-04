@@ -1,38 +1,300 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.card {
+  width: 100%;
+  max-width: 960px;
+  padding: 24px;
+  margin: 12px auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.user {
+  padding: 20px;
+  border: 1px solid orange;
+  margin-top: 15px;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  /* justify-content: space-between; */
   align-items: center;
+}
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  /* left: 0; */
+}
+.routeBar {
+  width: 210px;
+  position: fixed;
+  top: 120px;
+  left: 28px;
+  padding: 8px;
+  border: 1px solid lightgrey;
+}
+/* .routeBar {
+
+} */
+.rightBlock {
+  width: calc(100% - 258px);
+  position: absolute;
+  left: 262px;
+}
+.post.comment {
+  padding: 20px;
+  border: 1px solid teal;
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* анимация */
+.remove-btn {
+  margin-right: 0.5rem;
+}
+
+.post-enter {
+  transform: translateX(-350px);
+}
+.post-enter-active {
+  transform: translateX(0px);
+  transition: all 500ms ease-in;
+}
+.post-exit {
+  opacity: 1;
+}
+.post-exit-active {
+  transform: translateX(-350px);
+  transition: all 500ms ease-in;
+}
+/* анимация */
+
+/* анимация */
+.remove-btn {
+  margin-right: 0.5rem;
+}
+
+.comment-enter {
+  transform: translateX(-700px);
+}
+.comment-enter-active {
+  transform: translateX(0px);
+  transition: all 500ms ease-in;
+}
+.comment-exit {
+  opacity: 1;
+}
+.comment-exit-active {
+  transform: translateX(-700px);
+  transition: all 500ms ease-in;
+}
+/* анимация */
+
+.postItem {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.cardBlock {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.cardPhoto {
+  width: 64px;
+}
+.cardDescription {
+  width: calc(80% - 24px);
+  /* width: 75%; */
+}
+.cardPhotoDescription {
+  width: calc(80% - 88px);
+}
+.cardPhotoDescriptionMich {
+  width: calc(80% - 168px);
+}
+.cardButton {
+  width: 20%;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.albumImageMich {
+  width: 104px;
+  height: 104px;
+}
+.albumImage {
+  width: 64px;
+  height: 64px;
+}
+.containerButton {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 2rem, 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.displayBlock {
+  display: block;
+}
+.displayFlex {
+  display: flex;
+}
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+.flexWrap {
+  flex-wrap: wrap;
+}
+.post__list {
+  width: 100%;
+  padding: 20px;
+}
+.pages {
+  display: flex;
+  margin-top: 36px;
+}
+.page {
+  border: 2px solid green;
+  padding: 2px 8px;
+  cursor: pointer;
+}
+
+.link {
+  text-decoration: none;
+}
+.mySelect {
+  width: 166px;
+  height: 38px;
+}
+.myInput {
+  width: 166px;
+  height: 38px;
+}
+.containerImageProduct {
+  width: 100%;
+  display: flex;
+  /* justify-content: center; */
+}
+.sizeImgProduct {
+  width: 100%;
+  max-width: 16.6667%;
+  height: auto;
+  margin: auto;
+}
+
+.mAuto {
+  margin: auto;
+}
+.mY {
+  margin: 2px 0;
+}
+.mb-1 {
+  margin-bottom: 1rem;
+}
+.mb-2 {
+  margin-bottom: 2rem;
+}
+.mb-4 {
+  margin-bottom: 4rem;
+}
+.mb-5 {
+  margin-bottom: 5rem;
+}
+.mb-6 {
+  margin-bottom: 6rem;
+}
+
+.ml-1 {
+  margin-left: 1rem;
+}
+.ml-2 {
+  margin-left: 2rem;
+}
+.ml-3 {
+  margin-left: 3rem;
+}
+.ml-4 {
+  margin-left: 4rem;
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}
+.mt-4 {
+  margin-top: 4rem;
+}
+.mt-5 {
+  margin-top: 5rem;
+}
+.mt-6 {
+  margin-top: 6rem;
+}
+
+.mr-1 {
+  margin-right: 1rem;
+}
+.mr-2 {
+  margin-right: 2rem;
+}
+.mr-3 {
+  margin-right: 3rem;
+}
+.mr-4 {
+  margin-right: 4rem;
+}
+.mr-5 {
+  margin-right: 5rem;
+}
+.mr-6 {
+  margin-right: 6rem;
+}
+
+.textCenter {
+  text-align: center;
+}
+.textLine {
+  text-decoration: line-through;
+}
+.fontBold {
+  font-weight: bold;
+}
+.colorBlue {
+  color: blue;
+}
+.colorBlueSky {
+  color: #0d6efd;
+}
+.colorRed {
+  color: red;
+}
+.colorGreen {
+  color: green;
+}
+.fullWidth {
+  width: 100%;
+}
+.widthFull {
+  width: 100vw;
+}
+.width30 {
+  width: 30vw;
+}
+.width70 {
+  width: 70vw;
+}
+/* post */
+.loginPage {
+  width: 100%;
+  max-width: 474px;
+}
+.lastElement {
+  height: 20px;
+  background: red;
 }
