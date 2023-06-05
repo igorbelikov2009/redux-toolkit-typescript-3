@@ -30,12 +30,12 @@ export const userSlice = createSlice({
   initialState: initialState, // Сюда мы передаём дефолтное значение.
 
   reducers: {
-    // increment(state, action: PayloadAction<number>) {
-    //   state.count += action.payload;
-    // },
-    // decrement(state, action: PayloadAction<number>) {
-    //   state.count -= action.payload;
-    // },
+    increment(state, action: PayloadAction<number>) {
+      state.count += action.payload;
+    },
+    decrement(state, action: PayloadAction<number>) {
+      state.count -= action.payload;
+    },
 
     // // Первый редюсер будет вызываться в тот момент, когда мы начинаем подгрузку пользователей.
     usersFetching(state) {
