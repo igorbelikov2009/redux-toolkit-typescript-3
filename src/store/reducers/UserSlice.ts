@@ -1,3 +1,5 @@
+// 1.  Используем createSlice
+
 // В редакс редюсер - это просто по сути чистая функция, которая принимает
 // state, action. В зависимости от экшена как-то изменяет state и возвращает
 // его нам в обновлённом виде. В редакс-тулкит есть, так называемые, слайсы.
@@ -11,7 +13,6 @@ interface UserState {
   users: IUser[];
   isLoading: boolean;
   error: string;
-  count: number;
 }
 
 // Создаём объект типа UserState, который ожидаем в качестве загрузки.
@@ -19,7 +20,6 @@ const initialState: UserState = {
   users: [],
   isLoading: false,
   error: "",
-  count: 0,
 };
 
 // Создаём сам редюсер. Подобные редюсеры в тулкит называются слайсами.
@@ -30,13 +30,6 @@ export const userSlice = createSlice({
   initialState: initialState, // Сюда мы передаём дефолтное значение.
 
   reducers: {
-    increment(state, action: PayloadAction<number>) {
-      state.count += action.payload;
-    },
-    decrement(state, action: PayloadAction<number>) {
-      state.count -= action.payload;
-    },
-
     // // Первый редюсер будет вызываться в тот момент, когда мы начинаем подгрузку пользователей.
     usersFetching(state) {
       state.isLoading = true;

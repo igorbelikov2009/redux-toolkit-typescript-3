@@ -1,9 +1,15 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./reducers/UserSlice";
+import userAsyncThunkReducer from "./reducers/userAsyncThunkSlice";
+import { userAPI } from "../services/UserService";
 
 // Создаём корневой редюсер, состоящий из комбинации всех редюсеров
 const rootReducer = combineReducers({
   userReducer,
+  userAsyncThunkReducer,
+
+  // Регистрируем редюсер с UserService.ts как ключ-значение
+  [userAPI.reducerPath]: userAPI.reducer,
 });
 
 // Создаём функцию setupStore, с помощью её мы будем конфигурировать
@@ -16,7 +22,7 @@ export const setupStore = () => {
     // Добавляем к дефолтному мидлвееру, методом concat(), мидлвеер из нашего postAPI.
     // Затем, методом concat(), добавляем мидлвеер из нашего todoAPI
     // Затем, методом concat(), добавляем мидлвеер из нашего commentAPI
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userAPI.middleware),
   });
 };
 

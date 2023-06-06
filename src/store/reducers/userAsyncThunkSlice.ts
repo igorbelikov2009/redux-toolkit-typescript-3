@@ -1,3 +1,4 @@
+// используем createAsyncThunk
 import { IUser } from "./../../models/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { fetchAsyncThunkUsers } from "./ActionCreater";

@@ -29,7 +29,11 @@ export const fetchUsers = async (dispatch: AppDispacth) => {
 // внутри которого мы будем реализовывать какие-то действия, в нашем случае
 // мы должны отправить запрос и вернуть какие-то данные.
 
-export const fetchAsyncThunkUsers = createAsyncThunk("userAsyncThunk/fetchAll", async (_, thunkAPI) => {
+export const fetchAsyncThunkUsers = createAsyncThunk("userAsyncThunk/fetchAll", async (_: void, thunkAPI) => {
   try {
-  } catch (error) {}
+    const response = await axios.get<IUser[]>("https://jsonplaceholder.typicode.com/users");
+    return response.data;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue("Не удалось загрузить список юзеров.");
+  }
 });
