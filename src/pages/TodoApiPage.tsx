@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Container, Row, Button } from "react-bootstrap";
 import { todoApi } from "../services/TodoService";
 import TodoItem from "../components/items/TodoItem";
@@ -32,16 +32,66 @@ const TodoApiPage = () => {
   // Получаем список дел постранично.
   const { data: todos, error, isLoading } = todoApi.useGetTodoPageByPageQuery(page);
 
-  const nandleRemove = () => {};
-  const handleUpdate = () => {};
+  // Получаем мутации из todoApi
+  const [createTodo, { error: createError }] = todoApi.useCreateTodoMutation();
+  const [updateTodo, { error: updateError }] = todoApi.useUpdateTodoMutation();
+  const [deleteTodo, { error: deleteError }] = todoApi.useDeleteTodoMutation();
+
+  const handleCreate = async () => {
+    const title = prompt("Введите название дела") || "";
+    const completed = false;
+    await createTodo({ title, completed } as ITodo);
+  };
+
+  const nandleRemove = (todo: ITodo) => {
+    deleteTodo(todo);
+  };
+  const handleUpdate = (todo: ITodo) => {
+    updateTodo(todo);
+  };
+  // Сортировка и поиск
+  //===============================================================================================
+  const [filter, setFilter] = useState<IFilter>({ sort: "", query: "" });
+  const options: IOption[] = [
+    { value: "id", name: "По номеру дела" },
+    { value: "title", name: "По названию дела" },
+    { value: "completed", name: "По статусу выполнения" },
+  ];
+
+  // Отсортированный массив:
+  const sortedTodos = useMemo(() => {
+    if (filter.sort && todos) {
+      return [...todos].sort((a, b) => (a[filter.sort] > b[filter.sort] ? 1 : -1));
+    }
+    return todos;
+  }, [filter.sort, todos]);
+
+  // Отсортированный и отфильтрованный массив:
+  const sortedAndSearchedTodos = useMemo(() => {
+    if (sortedTodos) {
+      return sortedTodos.filter((todo) => todo.title.toLowerCase().includes(filter.query));
+    }
+  }, [filter.query, sortedTodos]);
+
+  // Сортировка и поиск
+  //===============================================================================================
 
   return (
     <Container className="card mt-6">
-      <div className="containerButton"></div>
+      <div className="containerButton">
+        <Button variant="outline-success mb-4" onClick={handleCreate}>
+          Добавить новое дело
+        </Button>
+      </div>
+
       <Row>
         <div>
           <h1 className="textCenter">Список дел пользователей из todoAPI</h1>
+
           {isLoading && <h1> Идёт загрузка</h1>}
+
+          <PaginationButtons page={page} pages={pages} countPage={countPage} setPage={setPage} />
+          <SortFilter filter={filter} setFilter={setFilter} options={options} placeholder="Поиск по названию дела..." />
 
           <div>
             <>
@@ -50,12 +100,29 @@ const TodoApiPage = () => {
                   <> Произошла ошибка при загрузке. </>
                 </h1>
               )}
+              {createError && (
+                <h1>
+                  <> Произошла ошибка при создании. </>
+                </h1>
+              )}
+              {deleteError && (
+                <h1>
+                  <> Произошла ошибка при удалении. </>
+                </h1>
+              )}
+              {updateError && (
+                <h1>
+                  <> Произошла ошибка при обновлении. </>
+                </h1>
+              )}
             </>
           </div>
 
           <div className="post">
-            {todos &&
-              todos.map((todo) => <TodoItem key={todo.id} todo={todo} remove={nandleRemove} update={handleUpdate} />)}
+            {sortedAndSearchedTodos &&
+              sortedAndSearchedTodos.map((todo) => (
+                <TodoItem key={todo.id} todo={todo} remove={nandleRemove} update={handleUpdate} />
+              ))}
           </div>
         </div>
       </Row>

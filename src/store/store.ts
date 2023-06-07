@@ -3,6 +3,7 @@ import userReducer from "./reducers/UserSlice";
 import userAsyncThunkReducer from "./reducers/userAsyncThunkSlice";
 import { userAPI } from "../services/UserService";
 import { todoApi } from "../services/TodoService";
+import { albumApi } from "../services/AlbumService";
 
 // Создаём корневой редюсер, состоящий из комбинации всех редюсеров
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   // Регистрируем редюсер с UserService.ts как ключ-значение
   [userAPI.reducerPath]: userAPI.reducer,
   [todoApi.reducerPath]: todoApi.reducer,
+  [albumApi.reducerPath]: albumApi.reducer,
 });
 
 // Создаём функцию setupStore, с помощью её мы будем конфигурировать
@@ -24,7 +26,8 @@ export const setupStore = () => {
     // Добавляем к дефолтному мидлвееру, методом concat(), мидлвеер из нашего postAPI.
     // Затем, методом concat(), добавляем мидлвеер из нашего userAPI
     // Затем, методом concat(), добавляем мидлвеер из нашего todoAPI
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userAPI.middleware).concat(todoApi.middleware),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(userAPI.middleware).concat(todoApi.middleware).concat(albumApi.middleware),
   });
 };
 
