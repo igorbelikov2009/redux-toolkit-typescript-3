@@ -102,7 +102,8 @@ export interface IRoute {
   loadData?: any;
   exact?: boolean | undefined;
   path: string;
-  Component?: React.FC<{}>;
+  // Component?: React.FC<{}>;
+  Component?: any;
   Render?: React.FC<{}>;
 }
 
@@ -123,4 +124,9 @@ export interface IButtonsRoute {
 export interface IFilter {
   sort: string;
   query: string;
+}
+
+export interface IOption {
+  value: any;
+  name: string | number;
 }

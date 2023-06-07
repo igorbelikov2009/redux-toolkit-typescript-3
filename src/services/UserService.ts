@@ -8,14 +8,14 @@ export const userAPI = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/" }),
   tagTypes: ["User"],
-  endpoints: (build) => ({
-    fetchAllUsers: build.query<IUser[], number | void>({
+  endpoints: (builder) => ({
+    fetchAllUsers: builder.query<IUser[], number | void>({
       query: () => ({
         url: "/users",
       }),
     }),
     // Эндпоинт получения пользователей постранично - делаем пагинацию:___
-    getUsersPagination: build.query<IUser[], number | void>({
+    getUsersPagination: builder.query<IUser[], number | void>({
       // Для пагинации соблюдаем последовательность page и limit
       query: (page: number = 1, limit: number = 5) => ({
         url: "/users",
@@ -28,7 +28,7 @@ export const userAPI = createApi({
       providesTags: ["User"],
     }),
     // Создание пользователя: ___
-    createUser: build.mutation<IUser, IUser>({
+    createUser: builder.mutation<IUser, IUser>({
       query: (user) => ({
         url: "/users",
         method: "POST",
@@ -37,7 +37,7 @@ export const userAPI = createApi({
       invalidatesTags: ["User"],
     }),
     // Обновление пользователя: ___
-    updateUser: build.mutation<IUser, IUser>({
+    updateUser: builder.mutation<IUser, IUser>({
       query: (user) => ({
         url: `/users/${user.id}`,
         method: "PUT",
@@ -46,7 +46,7 @@ export const userAPI = createApi({
       invalidatesTags: ["User"],
     }),
     // Удаление пользователя: ___
-    deleteUser: build.mutation<IUser, IUser>({
+    deleteUser: builder.mutation<IUser, IUser>({
       query: (user) => ({
         url: `/users/${user.id}`,
         method: "DELETE",
