@@ -17,7 +17,7 @@ const TodoItem: FC<ITodoItemProps> = ({ todo, remove, update }) => {
 
   const handleCheckbox = (event: React.ChangeEvent) => {
     let completed = !todo.completed;
-    update({ ...todo, completed });
+    update({ ...todo, completed } as ITodo);
   };
 
   return (

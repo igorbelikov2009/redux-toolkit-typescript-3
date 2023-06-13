@@ -113,25 +113,29 @@ const UserApiPage: FC<IUserApiPageProps> = ({ topOfPage }) => {
     <Container className="card mt-6">
       <Row>
         <div>
-          <h1 className="textCenter">Список пользователей из userAPI</h1>
+          {sortedUsers && (
+            <div>
+              <h1 className="textCenter">Список пользователей из userAPI</h1>
 
-          <div className="mt-1 mb-4">
-            <div className="textCenter">
-              <Button variant="outline-success" onClick={handleCreate}>
-                Добавить нового пользователя
-              </Button>
+              <div className="mt-1 mb-4">
+                <div className="textCenter">
+                  <Button variant="outline-success" onClick={handleCreate}>
+                    Добавить нового пользователя
+                  </Button>
+                </div>
+
+                <MySelect
+                  defaultValue="Сортировка"
+                  disabled={true}
+                  options={options}
+                  value={selectedSort}
+                  onChangeValue={sortUsers}
+                />
+              </div>
+
+              <PaginationButtons countPage={countPage} page={page} pages={pages} setPage={setPage} />
             </div>
-
-            <MySelect
-              defaultValue="Сортировка"
-              disabled={true}
-              options={options}
-              value={selectedSort}
-              onChangeValue={sortUsers}
-            />
-          </div>
-
-          <PaginationButtons countPage={countPage} page={page} pages={pages} setPage={setPage} />
+          )}
 
           <div>{isLoading && <h1> Идёт загрузка </h1>}</div>
 

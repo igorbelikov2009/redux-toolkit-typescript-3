@@ -9,7 +9,7 @@ interface UserItemProps {
 }
 
 const UserItem: FC<UserItemProps> = ({ user, update, remove }) => {
-  const handleUpdate = (event: React.MouseEvent) => {
+  const handleUpdate = () => {
     const name = prompt("Введите имя пользователя") || "";
     const username = prompt("Введите ник пользователя") || "";
     const email = prompt("Введите  email") || "";
@@ -33,7 +33,7 @@ const UserItem: FC<UserItemProps> = ({ user, update, remove }) => {
       website,
       address: { street, suite, city, zipcode, geo: { lat: geoLat, lng: geoLng } },
       company: { name: companyName, catchPhrase: companyCatchPhrase, bs: companyBS },
-    });
+    } as IUser);
   };
 
   const handleRemove = (event: React.MouseEvent) => {

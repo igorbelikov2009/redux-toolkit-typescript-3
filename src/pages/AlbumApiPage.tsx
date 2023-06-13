@@ -25,13 +25,17 @@ const AlbumApiPage = () => {
     <Container className="card mt-6">
       <Row>
         <div>
-          <h3 className="textCenter">Список альбомов из albumAPI </h3>
+          {albums && (
+            <>
+              <h3 className="textCenter">Список альбомов из albumAPI </h3>
 
-          <div className="containerButton">
-            <Button variant="outline-success" onClick={handleCreate}>
-              Добавить новый альбом
-            </Button>
-          </div>
+              <div className="containerButton mb-4">
+                <Button variant="outline-success" onClick={handleCreate}>
+                  Добавить новый альбом
+                </Button>
+              </div>
+            </>
+          )}
 
           <div>
             {isLoading && <h1>Идёт загрузка</h1>}
@@ -40,9 +44,10 @@ const AlbumApiPage = () => {
 
           <div>
             {error && (
-              <h1>
-                <> Произошла ошибка при загрузке. </>
-              </h1>
+              <h6>
+                Запусти команду в парралельном терминале:
+                <span className="colorRed"> json-server --watch db.json --port 5000</span>
+              </h6>
             )}
 
             {updateError && (

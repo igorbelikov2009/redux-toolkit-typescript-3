@@ -9,9 +9,9 @@ interface AlbumItemProps {
 }
 
 const AlbumItem: FC<AlbumItemProps> = ({ album, update, remove }) => {
-  const handleUpdate = (event: React.MouseEvent) => {
+  const handleUpdate = () => {
     const title = prompt("Введите название альбома") || "";
-    update({ ...album, title });
+    update({ ...album, title } as IAlbum);
   };
 
   const handleRemove = (event: React.MouseEvent) => {

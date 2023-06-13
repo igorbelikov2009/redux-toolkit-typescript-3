@@ -78,28 +78,41 @@ const TodoApiPage = () => {
 
   return (
     <Container className="card mt-6">
-      <div className="containerButton">
-        <Button variant="outline-success mb-4" onClick={handleCreate}>
-          Добавить новое дело
-        </Button>
-      </div>
+      {sortedAndSearchedTodos && (
+        <div className="containerButton">
+          <Button variant="outline-success mb-4" onClick={handleCreate}>
+            Добавить новое дело
+          </Button>
+        </div>
+      )}
 
       <Row>
         <div>
-          <h1 className="textCenter">Список дел пользователей из todoAPI</h1>
-
           {isLoading && <h1> Идёт загрузка</h1>}
 
-          <PaginationButtons page={page} pages={pages} countPage={countPage} setPage={setPage} />
-          <SortFilter filter={filter} setFilter={setFilter} options={options} placeholder="Поиск по названию дела..." />
+          {sortedAndSearchedTodos && (
+            <>
+              <h1 className="textCenter">Список дел пользователей из todoAPI</h1>
+
+              <PaginationButtons page={page} pages={pages} countPage={countPage} setPage={setPage} />
+              <SortFilter
+                filter={filter}
+                setFilter={setFilter}
+                options={options}
+                placeholder="Поиск по названию дела..."
+              />
+            </>
+          )}
 
           <div>
             <>
               {error && (
-                <h1>
-                  <> Произошла ошибка при загрузке. </>
-                </h1>
+                <h6>
+                  Запусти команду в парралельном терминале:
+                  <span className="colorRed"> json-server --watch db.json --port 5000</span>
+                </h6>
               )}
+
               {createError && (
                 <h1>
                   <> Произошла ошибка при создании. </>

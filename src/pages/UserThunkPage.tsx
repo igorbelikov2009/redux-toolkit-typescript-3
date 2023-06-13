@@ -15,7 +15,7 @@ const UserThunkPage: FC = () => {
   }, [dispatch]);
 
   return (
-    <Container className="mt-6 mb-4">
+    <Container className="card mt-6 mb-4">
       <h3 className="textCenter mb-5">
         Используем redux toolkit createAsyncThunk, создаём экстра-редюсер userAsyncThunkReducer с помощью функции
         createSlice()
