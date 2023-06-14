@@ -7,14 +7,12 @@ export const postAPI = createApi({
   tagTypes: ["Post"],
   endpoints: (builder) => ({
     // Получение всех posts для вычисления значения totalCount для пагинации
-    fetchAllPost: builder.query<IPost[], number | void>({
-      query: () => ({
-        url: "/posts",
-      }),
+    fetchAllPost: builder.query<IPost[], number | string | void>({
+      query: (limit = "") => `posts?page:_page${limit && `_limit=${limit}`}`,
     }),
     // Получение постов постранично с учётом пагинации
-    getPostByPage: builder.query<IPost[], number | void>({
-      query: (page: number = 1, limit: number = 10) => ({
+    getPostByPage: builder.query<IPost[], number | string | void>({
+      query: (page: number = 1, limit: number | string = "") => ({
         url: "/posts",
         params: {
           _page: page,

@@ -7,6 +7,7 @@ import { albumApi } from "../services/AlbumService";
 import { commentApi } from "../services/CommentService";
 import { photoAPI } from "../services/PhotoService";
 import { postAPI } from "../services/PostService";
+import { productAPI } from "../services/ProductService";
 
 // Создаём корневой редюсер, состоящий из комбинации всех редюсеров
 const rootReducer = combineReducers({
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   [commentApi.reducerPath]: commentApi.reducer,
   [photoAPI.reducerPath]: photoAPI.reducer,
   [postAPI.reducerPath]: postAPI.reducer,
+  [productAPI.reducerPath]: productAPI.reducer,
 });
 
 // Создаём функцию setupStore, с помощью её мы будем конфигурировать
@@ -39,7 +41,8 @@ export const setupStore = () => {
         .concat(albumApi.middleware)
         .concat(commentApi.middleware)
         .concat(photoAPI.middleware)
-        .concat(postAPI.middleware),
+        .concat(postAPI.middleware)
+        .concat(productAPI.middleware),
   });
 };
 

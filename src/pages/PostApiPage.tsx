@@ -9,9 +9,11 @@ import { postAPI } from "../services/PostService";
 
 const PostApiPage = () => {
   // PAGINATION
-  //================================================================================
+  // //================================================================================
+  const [limit, setLimit] = useState<number | string>(10);
+  const [page, setPage] = useState<number>(1);
 
-  const { data } = postAPI.useFetchAllPostQuery();
+  const { data } = postAPI.useFetchAllPostQuery(limit);
   let totalCount = 0;
 
   if (data) {
@@ -19,19 +21,17 @@ const PostApiPage = () => {
   }
   // console.log(data?.length);
 
-  const [limit, setLimit] = useState<number>(10);
-  const [page, setPage] = useState<number>(1);
-  let countPage = Math.ceil(totalCount / limit);
-  console.log(countPage);
+  let countPage = Math.ceil(totalCount / Number(limit));
+  // console.log(countPage);
 
   const pages: number[] = [];
   for (let i = 0; i < countPage; i++) {
     pages.push(i + 1);
   }
 
+  // // PAGINATION
+  // //================================================================================
   const { data: posts, error, isLoading } = postAPI.useGetPostByPageQuery(page);
-  // PAGINATION
-  //================================================================================
 
   const [createPost, { error: errorCreate }] = postAPI.useCreatePostMutation();
   const [updatePost, { error: errorUpdate }] = postAPI.useUpdatePostMutation();
@@ -58,7 +58,6 @@ const PostApiPage = () => {
     { value: "title", name: "По назаванию поста" },
     { value: "body", name: "По содержимому поста" },
   ];
-
   const [selectedSort, setSelectedSort] = useState<string>("");
 
   function getSortedPosts() {
@@ -101,6 +100,7 @@ const PostApiPage = () => {
             </div>
           </div>
         )}
+
         <PaginationButtons countPage={countPage} page={page} pages={pages} setPage={setPage} />
 
         <div>{isLoading && <h1> Идёт загрузка </h1>}</div>
